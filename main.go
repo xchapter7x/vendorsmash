@@ -55,6 +55,7 @@ func (s *smasher) smash(path string, f os.FileInfo, err error) error {
 	if !ref.IsDir() {
 		err = Copy(s.target+p[len(p)-1], path)
 	} else {
+		os.RemoveAll(path)
 		os.MkdirAll(path, 0777)
 	}
 	return err
