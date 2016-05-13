@@ -52,11 +52,12 @@ func (s *smasher) visit(path string, f os.FileInfo, err error) error {
 func (s *smasher) smash(path string, f os.FileInfo, err error) error {
 	p := strings.Split(path, "/vendor/")
 	ref, _ := os.Stat(path)
+	newPath := pathlib.Join(s.target, p[len(p)-1])
+
 	if !ref.IsDir() {
-		err = Copy(pathlib.Join(s.target, p[len(p)-1]), path)
+		err = Copy(newPath, path)
 	} else {
-		os.RemoveAll(path)
-		os.MkdirAll(path, 0777)
+		os.MkdirAll(newPath, 0777)
 	}
 	return err
 }
