@@ -82,7 +82,7 @@ func Copy(dst, src string) error {
 
 // SafeCreate creates a file, creating parent directories if needed
 func SafeCreate(name ...string) (file *os.File, err error) {
-	p, e := ensurePath(path.Join(name...))
+	p, e := ensurePath(pathlib.Join(name...))
 
 	if e != nil {
 		return nil, e
