@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"path"
+	pathlib "path"
 	"path/filepath"
 	"strings"
 )
@@ -53,7 +53,7 @@ func (s *smasher) smash(path string, f os.FileInfo, err error) error {
 	p := strings.Split(path, "/vendor/")
 	ref, _ := os.Stat(path)
 	if !ref.IsDir() {
-		err = Copy(s.target+p[len(p)-1], path)
+		err = Copy(pathlib.Join(s.target, p[len(p)-1]), path)
 	} else {
 		os.RemoveAll(path)
 		os.MkdirAll(path, 0777)
